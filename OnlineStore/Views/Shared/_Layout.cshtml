@@ -1,16 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>MGS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: url('../../Image/background1.jpg');background-size">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,15 +18,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a style="background-color:#ec4d37;border-radius:5px;margin-left:1px;color:snow;font-family:fantasy;font-size:25px" @Html.ActionLink("Metal Gear Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home")</li>
                     <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Роли", "Index", "UserRoles")</li>
-                    <li>@Html.ActionLink("Аккаунты", "Users", "UserRoles")</li>
+                    <li>@Html.ActionLink("Каталог", "Index", "Customer")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Роли", "Index", "UserRoles")</li>
+                        <li>@Html.ActionLink("Аккаунты", "Users", "UserRoles")</li>
+                        <li>@Html.ActionLink("Товары", "Index", "Product")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,7 +39,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <p style="font-family:fantasy;color:#ec4d37;font-size:18px">&copy; @DateTime.Now.Year - Metal Gear Store</p>
         </footer>
     </div>
 

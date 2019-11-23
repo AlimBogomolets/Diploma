@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace OnlineStore.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
         private ApplicationUserManager _userManager;

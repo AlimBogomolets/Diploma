@@ -2,8 +2,13 @@
 @{
     ViewBag.Title = "Users";
 }
-
-<table class="table table-hover">
+<h2 style="font-family:fantasy;color:#ec4d37">Пользователи</h2>
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <td>Логин</td>
+        <td>Роли</td>
+        <td></td>
+    </tr>
     @foreach (var user in Model)
     {
         <tr>

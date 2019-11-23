@@ -1,0 +1,118 @@
+﻿@model IEnumerable<OnlineStore.Models.Product>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .dropbtn {
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ec4d37
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #ec4d37;
+    }
+</style>
+@{
+    ViewBag.Title = "Каталог";
+}
+
+<h2 style="font-family:fantasy;color:#ec4d37">Каталог:</h2>
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    @Html.DisplayNameFor(model => model.TypeID)
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    @Html.ActionLink("Все", "Index", "Customer")
+                    @Html.ActionLink("Видеокарты", "ShowGPU", "Customer")
+                    @Html.ActionLink("Процессоры", "ShowCPU", "Customer")
+                    @Html.ActionLink("ОЗУ", "ShowRAM", "Customer")
+                    @Html.ActionLink("Жесткие диски", "ShowHDD", "Customer")
+                    @Html.ActionLink("SSD", "ShowSSD", "Customer")
+                </div>
+            </div>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.Image != null)
+                {
+
+                    @Html.Raw("<img style='width:150px; height:100px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "Details", new { id = item.ProductId }) |
+                @Html.ActionLink("Добавить в корзиину", "AddToCart", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+
+</table>

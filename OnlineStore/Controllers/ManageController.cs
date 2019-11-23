@@ -54,25 +54,87 @@ namespace OnlineStore.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
-                : message == ManageMessageId.SetPasswordSuccess ? "Пароль задан."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Настроен поставщик двухфакторной проверки подлинности."
-                : message == ManageMessageId.Error ? "Произошла ошибка."
-                : message == ManageMessageId.AddPhoneSuccess ? "Ваш номер телефона добавлен."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Ваш номер телефона удален."
-                : "";
+            using (var context = new ApplicationDbContext())
+            {
+                ViewBag.StatusMessage =
+                    message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
+                    : message == ManageMessageId.SetPasswordSuccess ? "Пароль задан."
+                    : message == ManageMessageId.SetTwoFactorSuccess ? "Настроен поставщик двухфакторной проверки подлинности."
+                    : message == ManageMessageId.Error ? "Произошла ошибка."
+                    : message == ManageMessageId.AddPhoneSuccess ? "Ваш номер телефона добавлен."
+                    : message == ManageMessageId.RemovePhoneSuccess ? "Ваш номер телефона удален."
+                    : "";
 
-            var userId = User.Identity.GetUserId();
+                var userId = User.Identity.GetUserId();
+                var user = context.Users.FirstOrDefault(x => x.Id == userId);
             var model = new IndexViewModel
             {
+                user = user,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
             };
             return View(model);
+            }
+        }
+        
+        [HttpGet]
+        public ActionResult ChangeData(string ID)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(x => x.Id == ID);
+                return View(user);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChangeData(ApplicationUser user)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var u = context.Users.FirstOrDefault(x => x.Id == user.Id);
+                u.FName = user.FName;
+                u.LName = user.LName;
+
+                u.PhoneNumber = user.PhoneNumber;
+
+                context.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+                return RedirectToAction("");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ChangeAddress(string ID)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return View(context.Users.Find(User.Identity.GetUserId()));
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAddress(ApplicationUser user)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var u = context.Users.Find(User.Identity.GetUserId());
+                u.Country = user.Country;
+                u.City = user.City;
+                u.Street = user.Street;
+                u.House = user.House;
+                u.Flat = user.Flat;
+                u.ZIP = user.ZIP;
+
+                context.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+                return RedirectToAction("");
+            }
         }
 
         //

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using OnlineStore.Models;
+using OnlineStore.ViewModels;
 
 namespace OnlineStore
 {
@@ -18,8 +21,21 @@ namespace OnlineStore
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Подключите здесь службу электронной почты для отправки сообщения электронной почты.
-            return Task.FromResult(0);
+            var from = "testemailconfirmation11@gmail.com";
+            var pass = "KeepItSimple11";
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential(from, pass);
+            smtp.EnableSsl = true;
+
+            var mail = new MailMessage(from, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            return smtp.SendMailAsync(mail);
         }
     }
 

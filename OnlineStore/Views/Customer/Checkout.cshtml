@@ -1,0 +1,83 @@
+﻿@model IEnumerable<OnlineStore.ViewModels.CartViewModel>
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Вы уверены, что хотите приобрести данные товары?</h3>
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.product.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.TypeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.product.Image != null)
+                    {
+
+                        @Html.Raw("<img style='width:150px; height:100px;' src=\"data:image/jpeg;base64,"
+                                         + Convert.ToBase64String(item.product.Image) + "\" />")
+
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.TypeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.ActionLink("Изменить количество", "ChangeQuantity", new { id = item.CartID }) |
+                    @Html.ActionLink("Удалить из корзины", "DeleteFromCart", new { id = item.CartID })
+                </td>
+            </tr>
+        }
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Подтвердить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться в корзину", "ShowCart")
+        </div>
+    }
+</div>

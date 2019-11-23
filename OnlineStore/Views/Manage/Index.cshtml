@@ -3,13 +3,101 @@
     ViewBag.Title = "Управление";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 style="font-family:fantasy;color:#ec4d37">@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Изменение параметров учетной записи</h4>
+    <h4 style="font-family:fantasy;color:#1d1b1b">Изменение параметров учетной записи</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>Личные данные:</dt>
+        <dd>
+            [
+            @Html.ActionLink("Изменить", "ChangeData", new { ID = Model.user.Id}, null)
+            ]
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => Model.user.FName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => Model.user.FName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => Model.user.LName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => Model.user.LName)
+                    </dd>
+
+                    <dt>
+                        Номер телефона
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => Model.user.PhoneNumber)
+                    </dd>
+                </dl>
+            </div>
+                    <dt>Адрес:</dt>
+                    <dd>[@Html.ActionLink("Изменить адрес", "ChangeAddress")]</dd>
+        <dd>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.user.Country)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.user.Country)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.user.City)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.user.City)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.user.Street)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.user.Street)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.user.House)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.user.House)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.user.Flat)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.user.Flat)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.user.ZIP)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.user.ZIP)
+                        </dd>
+
+                    </dl>
+        </dd>
+        <dt>История</dt>
+        <dd>@Html.ActionLink("Посмотреть историю", "ShowHistory", "Customer")</dd>
         <dt>Пароль:</dt>
         <dd>
             [
@@ -29,59 +117,59 @@
             @Html.ActionLink("Управление", "ManageLogins") ]
         </dd>
         @*
-            Номера телефонов можно использовать в качестве второго проверочного фактора для системы двухфакторной проверки подлинности.
-             
-             В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
-                можно узнать, как для этого приложения ASP.NET настроить двухфакторную проверку подлинности с использованием SMS.
-             
-             Настроив двухфакторную проверку подлинности, раскомментируйте следующий блок
+        Номера телефонов можно использовать в качестве второго проверочного фактора для системы двухфакторной проверки подлинности.
+
+         В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
+            можно узнать, как для этого приложения ASP.NET настроить двухфакторную проверку подлинности с использованием SMS.
+
+         Настроив двухфакторную проверку подлинности, раскомментируйте следующий блок
         *@
-        @*  
-            <dt>Номер телефона:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
+        @*
+        <dt>Номер телефона:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Удалить" class="btn-link" />]</text>
-                    }
+                    @Html.AntiForgeryToken()
+                    <text>[<input type="submit" value="Удалить" class="btn-link" />]</text>
                 }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+            }
+        </dd>
         *@
-        <dt>Двухфакторная проверка подлинности:</dt>
+        @*<dt>Двухфакторная проверка подлинности:</dt>
         <dd>
             <p>
                 Поставщики двухфакторной проверки подлинности не настроены. В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
                 можно узнать, как настроить двухфакторную проверку подлинности для этого приложения ASP.NET.
-            </p>
+            </p>*@
             @*@if (Model.TwoFactor)
+            {
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Включено
-                        <input type="submit" value="Отключить" class="btn btn-link" />
-                        </text>
-                    }
+                    @Html.AntiForgeryToken()
+                    <text>Включено
+                    <input type="submit" value="Отключить" class="btn btn-link" />
+                    </text>
                 }
-                else
+            }
+            else
+            {
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Отключено
-                        <input type="submit" value="Включить" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
+                    @Html.AntiForgeryToken()
+                    <text>Отключено
+                    <input type="submit" value="Включить" class="btn btn-link" />
+                    </text>
+                }
+            }*@
         </dd>
     </dl>
 </div>

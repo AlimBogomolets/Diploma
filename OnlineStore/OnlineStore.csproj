@@ -168,27 +168,42 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
+    <Compile Include="Enum\ProductType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910301426346_InitialCreate.cs" />
-    <Compile Include="Migrations\201910301426346_InitialCreate.Designer.cs">
-      <DependentUpon>201910301426346_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911111436589_AddUserAddress.cs" />
-    <Compile Include="Migrations\201911111436589_AddUserAddress.Designer.cs">
-      <DependentUpon>201911111436589_AddUserAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CPU.cs" />
+    <Compile Include="Models\GPU.cs" />
+    <Compile Include="Models\HDD.cs" />
+    <Compile Include="Models\History.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Laptop.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\PC.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\RAM.cs" />
+    <Compile Include="Models\SSD.cs" />
     <Compile Include="Models\UserRolesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CPUViewModel.cs" />
+    <Compile Include="ViewModels\GPUViewModel.cs" />
+    <Compile Include="ViewModels\HDDViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
+    <Compile Include="ViewModels\LaptopViewModel.cs" />
+    <Compile Include="ViewModels\PCViewModel.cs" />
+    <Compile Include="ViewModels\RAMViewModel.cs" />
+    <Compile Include="ViewModels\SSDViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -253,9 +268,53 @@
     <Content Include="Views\UserRoles\EditUser.cshtml" />
     <Content Include="Views\UserRoles\Details.cshtml" />
     <Content Include="Views\UserRoles\Edit.cshtml" />
+    <Content Include="Views\Manage\ChangeData.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\CreateGPU.cshtml" />
+    <Content Include="Views\Product\CreateCPU.cshtml" />
+    <Content Include="Views\Product\ShowGPU.cshtml" />
+    <Content Include="Views\Product\GPUDetails.cshtml" />
+    <Content Include="Views\Product\CreateHDD.cshtml" />
+    <Content Include="Views\Product\CreateSSD.cshtml" />
+    <Content Include="Views\Product\CreateRAM.cshtml" />
+    <Content Include="Views\Product\CPUDetails.cshtml" />
+    <Content Include="Views\Product\SSDDetails.cshtml" />
+    <Content Include="Views\Product\HDDDetails.cshtml" />
+    <Content Include="Views\Product\RAMDetails.cshtml" />
+    <Content Include="Views\Shared\tp2.cshtml" />
+    <Content Include="Views\Product\GPUEdit.cshtml" />
+    <Content Include="Views\Product\CPUEdit.cshtml" />
+    <Content Include="Views\Product\SSDEdit.cshtml" />
+    <Content Include="Views\Product\HDDEdit.cshtml" />
+    <Content Include="Views\Product\RAMEdit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\CPUDetails.cshtml" />
+    <Content Include="Views\Customer\GPUDetails.cshtml" />
+    <Content Include="Views\Customer\HDDDetails.cshtml" />
+    <Content Include="Views\Customer\RAMDetails.cshtml" />
+    <Content Include="Views\Customer\SSDDetails.cshtml" />
+    <Content Include="Views\Customer\ShowCart.cshtml" />
+    <Content Include="Views\Customer\ChangeQuantity.cshtml" />
+    <Content Include="Views\Customer\Checkout.cshtml" />
+    <Content Include="Views\Customer\ShowHistory.cshtml" />
+    <Content Include="Views\Manage\ChangeAddress.cshtml" />
+    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Product\ShowCPU.cshtml" />
+    <Content Include="Views\Product\ShowSSD.cshtml" />
+    <Content Include="Views\Product\ShowRAM.cshtml" />
+    <Content Include="Views\Product\ShowHDD.cshtml" />
+    <Content Include="Views\Customer\ShowCPU.cshtml" />
+    <Content Include="Views\Customer\ShowGPU.cshtml" />
+    <Content Include="Views\Customer\ShowHDD.cshtml" />
+    <Content Include="Views\Customer\ShowRAM.cshtml" />
+    <Content Include="Views\Customer\ShowSSD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -269,14 +328,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910301426346_InitialCreate.resx">
-      <DependentUpon>201910301426346_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911111436589_AddUserAddress.resx">
-      <DependentUpon>201911111436589_AddUserAddress.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

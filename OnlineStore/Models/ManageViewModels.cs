@@ -7,6 +7,7 @@ namespace OnlineStore.Models
 {
     public class IndexViewModel
     {
+        public ApplicationUser user = new ApplicationUser();
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
