@@ -4,7 +4,7 @@
 <style>
     .dropbtn {
         border: none;
-        background-color: #1d1b1b;
+        background-color: snow;
         cursor: pointer;
     }
 
@@ -23,14 +23,14 @@
     }
 
         .dropdown-content a {
-            color: black;
+            color: #ec4d37;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
 
             .dropdown-content a:hover {
-                background-color: #ec4d37
+                background-color: #063852
             }
 
     .dropdown:hover .dropdown-content {
@@ -38,7 +38,7 @@
     }
 
     .dropdown:hover .dropbtn {
-        background-color: #ec4d37;
+        background-color: #063852 ;
     }
 </style>
 @{
@@ -48,7 +48,7 @@
 <h2 style="font-family:fantasy;color:#ec4d37">Список товаров</h2>
 <div class="dropdown">
     <button class="dropbtn">
-        <a class="btn btn-primary btn-group-sm " style="background-color:#1d1b1b;border-color:#1d1b1b;color:#ec4d37">Создать<i class="fa fa-caret-down" style="color:#ec4d37"></i></a>
+        <a class="btn btn-primary btn-group-sm " style="background-color:#063852;border-color:#ec4d37;color:#ec4d37">Создать<i class="fa fa-caret-down" style="color:#ec4d37"></i></a>
     </button>
     <div class="dropdown-content">
         <a href="http://localhost:56170/Product/CreateGPU" >Добавить GPU</a>
@@ -90,6 +90,10 @@
                                         + Convert.ToBase64String(item.Image) + "\" />")
 
                 }
+               @if(item.Image == null)
+                {
+                <img src="~/Image/no-photo.png" width="80" height="80"/>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeID)
@@ -104,9 +108,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Изменить", "Edit", new { id = item.ProductId })   |
-                @Html.ActionLink("Подробнее", "Details", new { id = item.ProductId }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.ProductId })
+                <a href="@Url.Action("Edit", "Product", new { id = item.ProductId }, null)"> <img border="0" src="~/Image/edit3.png" width="30" height="30" title="Изменить" style="margin-right:15px"/></a>
+                <a href="@Url.Action("Details", "Product", new { id = item.ProductId }, null)"> <img border="0" src="~/Image/info2.png" width="30" height="30" title="Подробнее" style="margin-right:15px"/></a>
+                <a href="@Url.Action("Delete", "Product", new { id = item.ProductId }, null)"> <img border="0" src="~/Image/delete3.png" width="30" height="30" title="Удалить" /></a>
             </td>
         </tr>
     }

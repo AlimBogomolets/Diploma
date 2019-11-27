@@ -67,6 +67,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Изменить", "Edit", new { id = Model.ProductId }) |
-    @Html.ActionLink("Вернуться", "Index")
+    <a href="@Url.Action("Index", "Product", null, null)"> <img border="0" src="~/Image/back2.png" width="30" height="30" title="Вернуться" style="float:left" /></a>
+    <a href="@Url.Action("Edit", "Customer", new { id = Model.ProductId}, null)"> <img border="0" src="~/Image/edit3.png" width="30" height="30" title="Изменить" style="float:left;margin-left:15px" /></a>
 </p>

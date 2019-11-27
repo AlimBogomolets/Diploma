@@ -14,6 +14,10 @@
                                     + Convert.ToBase64String(Model.Image) + "\" />")
 
             }
+            @if (Model.Image == null)
+            {
+                <img src="~/Image/no-photo.png" width="100" height="100" />
+            }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.TypeID)
@@ -73,6 +77,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Каталог", "Index") |
-    @Html.ActionLink("Корзина", "ShowCart")
+    <a href="@Url.Action("Index", "Customer", null, null)"> <img border="0" src="~/Image/back2.png" width="30" height="30" title="Вернуться" style="float:left" /></a>
+    <a href="@Url.Action("ShowCart", "Customer", null, null)"> <img border="0" src="~/Image/cart2.png" width="30" height="30" title="Корзина" style="float:right" /></a>
 </p>

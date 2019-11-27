@@ -9,42 +9,52 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: url('../../Image/background1.jpg');background-size">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a style="background-color:#ec4d37;border-radius:5px;margin-left:1px;color:snow;font-family:fantasy;font-size:25px" @Html.ActionLink("Metal Gear Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Каталог", "Index", "Customer")</li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Роли", "Index", "UserRoles")</li>
-                        <li>@Html.ActionLink("Аккаунты", "Users", "UserRoles")</li>
-                        <li>@Html.ActionLink("Товары", "Index", "Product")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
+<body >
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#063852" >
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a style="background-color:#063852;border-radius:5px;margin-left:0px;color:snow;font-family:fantasy;font-size:25px;margin-top:5px" @Html.ActionLink("Metal Gear Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="http://localhost:56170/Home/Contact"> <img border="0" src="~/Image/contact2.png" width="30" height="30" title="Связаться" /></a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:56170/Customer/Index"> <img border="0" src="~/Image/store2.png" width="30" height="30" title="Каталог" /></a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="http://localhost:56170/UserRoles/Index"> <img border="0" src="~/Image/roles2.png" width="30" height="30" title="Роли" /></a>
+                            </li>
+                            <li>
+                                <a href="http://localhost:56170/UserRoles/Users"> <img border="0" src="~/Image/accounts2.png" width="30" height="30" title="Аккаунты" /></a>
+                            </li>
+                            <li>
+                                <a href="http://localhost:56170/Product/Index"> <img border="0" src="~/Image/add2.png" width="30" height="30" title="Список товаров-редактирование" /></a>
+                            </li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p style="font-family:fantasy;color:#ec4d37;font-size:18px">&copy; @DateTime.Now.Year - Metal Gear Store</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p style="font-family:fantasy;color:#ec4d37;font-size:18px;margin-top:50px">&copy; @DateTime.Now.Year - Metal Gear Store</p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

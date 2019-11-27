@@ -168,7 +168,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -275,7 +274,6 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\CreateGPU.cshtml" />
     <Content Include="Views\Product\CreateCPU.cshtml" />
-    <Content Include="Views\Product\ShowGPU.cshtml" />
     <Content Include="Views\Product\GPUDetails.cshtml" />
     <Content Include="Views\Product\CreateHDD.cshtml" />
     <Content Include="Views\Product\CreateSSD.cshtml" />
@@ -302,10 +300,6 @@
     <Content Include="Views\Customer\ShowHistory.cshtml" />
     <Content Include="Views\Manage\ChangeAddress.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
-    <Content Include="Views\Product\ShowCPU.cshtml" />
-    <Content Include="Views\Product\ShowSSD.cshtml" />
-    <Content Include="Views\Product\ShowRAM.cshtml" />
-    <Content Include="Views\Product\ShowHDD.cshtml" />
     <Content Include="Views\Customer\ShowCPU.cshtml" />
     <Content Include="Views\Customer\ShowGPU.cshtml" />
     <Content Include="Views\Customer\ShowHDD.cshtml" />

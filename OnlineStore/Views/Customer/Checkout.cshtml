@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
 }
 
-<h3>Вы уверены, что хотите приобрести данные товары?</h3>
+<h2 style="font-family:fantasy;color:#ec4d37">Вы уверены, что хотите приобрести данные товары?</h2>
 <div>
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <table class="table table-hover table-bordered table-striped">
@@ -64,20 +64,26 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.ActionLink("Изменить количество", "ChangeQuantity", new { id = item.CartID }) |
-                    @Html.ActionLink("Удалить из корзины", "DeleteFromCart", new { id = item.CartID })
+                    <a href="@Url.Action("ChangeQuantity", "Customer", new { id = item.CartID }, null)"> <img border="0" src="~/Image/changequantity2.png" width="30" height="30" title="Изменить количествро" style="margin-right:15px" /></a>
+                    <a href="@Url.Action("DeleteFromCart", "Customer", new { id = item.CartID }, null)"> <img border="0" src="~/Image/removefromcart2.png" width="30" height="30" title="Удалить из корзины" style="margin-right:15px" /></a>
+
                 </td>
             </tr>
         }
     </table>
+    <dd style="text-align:right;font-family:fantasy;color:#011a27;font-size:25px"><b>Итого:</b></dd>
+    <dt style="text-align:right;color:red;font-family:fantasy;font-size:30px">@Model.Sum(x => x.product.Price * x.Quantity) сом</dt>
+
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
+<div>
+    <a href="@Url.Action("Index", "Customer", null, null)"> <img border="0" src="~/Image/back2.png" width="30" height="30" title="Вернуться" style="float:left" /></a>
+</div>
         <div class="form-actions no-color">
-            <input type="submit" value="Подтвердить" class="btn btn-default" /> |
-            @Html.ActionLink("Вернуться в корзину", "ShowCart")
+            <input type="submit" value="Подтвердить" class="btn btn-default" style="background-color:#063852;border-color:#ec4d37;color:#ec4d37;margin-left:40%"/>
         </div>
     }
 </div>

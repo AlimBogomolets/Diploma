@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<OnlineStore.ViewModels.CartViewModel>
-
 @{
     ViewBag.Title = "ShowCart";
 }
-
 <h2 style="font-family:fantasy;color:#ec4d37">Корзина</h2>
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <table class="table table-hover table-bordered table-striped">
@@ -43,6 +41,10 @@
                                         + Convert.ToBase64String(item.product.Image) + "\" />")
 
                 }
+                @if (item.product.Image == null)
+                {
+                    <img src="~/Image/no-photo.png" width="80" height="80" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.product.TypeID)
@@ -63,15 +65,22 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("Изменить количество", "ChangeQuantity", new { id = item.CartID }) |
-                @Html.ActionLink("Подробнее", "Details", new { id = item.product.ProductId }) |
-                @Html.ActionLink("Удалить из корзины", "DeleteFromCart", new { id = item.CartID })
+                <a href="@Url.Action("ChangeQuantity", "Customer", new { id = item.CartID }, null)"> <img border="0" src="~/Image/changequantity2.png" width="30" height="30" title="Изменить количествро" style="margin-right:15px" /></a>
+                <a href="@Url.Action("Details", "Customer", new { id = item.product.ProductId }, null)"> <img border="0" src="~/Image/info2.png" width="30" height="30" title="Подробнее" style="margin-right:15px" /></a>
+                <a href="@Url.Action("DeleteFromCart", "Customer", new { id = item.CartID }, null)"> <img border="0" src="~/Image/removefromcart2.png" width="30" height="30" title="Удалить из корзины" style="margin-right:15px" /></a>
             </td>
         </tr>
     }
 
 </table>
-<dd style="text-align:right">@Html.ActionLink("Очистить корзину", "ClearCart")</dd>
-<dd style="text-align:right"><b>Итого:</b></dd>
-<dt style="text-align:right">@Model.Sum(x => x.product.Price * x.Quantity) сом</dt>
-@Html.ActionLink("Купить", "Checkout")
+<dd style="text-align:right;font-family:fantasy;color:#011a27;font-size:25px"><b>Итого:</b></dd>
+<dt style="text-align:right;color:red;font-family:fantasy;font-size:30px">@Model.Sum(x => x.product.Price * x.Quantity) сом</dt>
+<a href="@Url.Action("Checkout", "Customer", null, null)"> <img border="0" src="~/Image/checkout2.png" width="50" height="50" title="Купить" style="float:right" /></a>
+<a href="@Url.Action("ClearCart", "Customer", null, null)"> <img border="0" src="~/Image/delete2.png" width="50" height="50" title="Очистить корзину" style="margin-left:20px;float:right;" /></a>
+<br />
+<br />
+<br />
+
+
+
+

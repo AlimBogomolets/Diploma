@@ -43,6 +43,10 @@
                                 + Convert.ToBase64String(item.product.Image) + "\" />")
 
         }
+        @if (item.product.Image == null)
+        {
+            <img src="~/Image/no-photo.png" width="80" height="80" />
+        }
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.product.TypeID)

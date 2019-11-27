@@ -10,6 +10,7 @@
     .dropdown {
         position: relative;
         display: inline-block;
+        color: #ec4d37
     }
 
     .dropdown-content {
@@ -22,14 +23,14 @@
     }
 
         .dropdown-content a {
-            color: black;
+            color: #ec4d37;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
 
             .dropdown-content a:hover {
-                background-color: #ec4d37
+                background-color: #063852
             }
 
     .dropdown:hover .dropdown-content {
@@ -37,7 +38,7 @@
     }
 
     .dropdown:hover .dropbtn {
-        background-color: #ec4d37;
+        background-color: #063852;
     }
 </style>
 @{
@@ -92,6 +93,10 @@
                                         + Convert.ToBase64String(item.Image) + "\" />")
 
                 }
+                @if (item.Image == null)
+                {
+                    <img src="~/Image/no-photo.png" width="100" height="100" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeID)
@@ -109,8 +114,8 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Подробнее", "Details", new { id = item.ProductId }) |
-                @Html.ActionLink("Добавить в корзиину", "AddToCart", new { id = item.ProductId })
+                <a href="@Url.Action("Details", "Customer", new { id = item.ProductId }, null)"> <img border="0" src="~/Image/info2.png" width="30" height="30" title="Подробнее" style="margin-right:15px" /></a>
+                <a href="@Url.Action("AddToCart", "Customer", new { id = item.ProductId }, null)"> <img border="0" src="~/Image/addtocart2.png" width="30" height="30" title="В корзину!" /></a>
             </td>
         </tr>
     }

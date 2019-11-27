@@ -24,47 +24,7 @@ namespace OnlineStore.Controllers
                 return View(products);
         }
 
-        public ActionResult ShowGPU()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var GPUs = context.Product.Where(x => x.TypeID == ProductType.GPU).ToList();
-                return View(GPUs);
-            }
-        }
-        public ActionResult ShowCPU()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var CPUs = context.Product.Where(x => x.TypeID == ProductType.CPU).ToList();
-                return View(CPUs);
-            }
-        }
-        public ActionResult ShowSSD()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var SSDs = context.Product.Where(x => x.TypeID == ProductType.SSD).ToList();
-                return View(SSDs);
-            }
-        }
-        public ActionResult ShowRAM()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var RAMs = context.Product.Where(x => x.TypeID == ProductType.RAM).ToList();
-                return View(RAMs);
-            }
-        }
-        public ActionResult ShowHDD()
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var HDDs = context.Product.Where(x => x.TypeID == ProductType.HDD).ToList();
-                return View(HDDs);
-            }
-        }
-
+        
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -192,7 +152,7 @@ namespace OnlineStore.Controllers
             if (ModelState.IsValid)
             {
                 byte[] imageData = null;
-                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = product.TypeID, Description = product.Description};
+                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = ProductType.GPU, Description = product.Description};
                 if(uploadImage != null)
                 {
                     using (var binaryReader = new BinaryReader(uploadImage.InputStream))
@@ -232,7 +192,7 @@ namespace OnlineStore.Controllers
             if (ModelState.IsValid)
             {
                 byte[] imageData = null;
-                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = product.TypeID, Description = product.Description };
+                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = ProductType.CPU, Description = product.Description };
                 if (uploadImage != null)
                 {
                     using (var binaryReader = new BinaryReader(uploadImage.InputStream))
@@ -268,7 +228,7 @@ namespace OnlineStore.Controllers
             if (ModelState.IsValid)
             {
                 byte[] imageData = null;
-                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = product.TypeID, Description = product.Description };
+                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = ProductType.SSD, Description = product.Description };
                 if (uploadImage != null)
                 {
                     using (var binaryReader = new BinaryReader(uploadImage.InputStream))
@@ -303,7 +263,7 @@ namespace OnlineStore.Controllers
             if (ModelState.IsValid)
             {
                 byte[] imageData = null;
-                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = product.TypeID, Description = product.Description };
+                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = ProductType.HDD, Description = product.Description };
                 if (uploadImage != null)
                 {
                     using (var binaryReader = new BinaryReader(uploadImage.InputStream))
@@ -338,7 +298,7 @@ namespace OnlineStore.Controllers
             if (ModelState.IsValid)
             {
                 byte[] imageData = null;
-                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = product.TypeID, Description = product.Description };
+                var pr = new Product { Manufacturer = product.Manufacturer, Name = product.Name, Price = product.Price, TypeID = ProductType.RAM, Description = product.Description };
                 if (uploadImage != null)
                 {
                     using (var binaryReader = new BinaryReader(uploadImage.InputStream))
