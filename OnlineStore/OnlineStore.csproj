@@ -306,6 +306,7 @@
     <Content Include="Views\Customer\ShowRAM.cshtml" />
     <Content Include="Views\Customer\ShowSSD.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Product\ShowHistoryAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

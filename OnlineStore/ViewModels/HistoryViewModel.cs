@@ -11,6 +11,9 @@ namespace OnlineStore.ViewModels
     {
         public int HistoryID { get; set; }
 
+        [Display(Name = "Аккаунт")]
+        public string UserName { get; set; }
+        
         public Product product { get; set; }
 
         [Display(Name = "Количество")]

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using OnlineStore.Enum;
 using OnlineStore.Models;
 using OnlineStore.ViewModels;
@@ -716,6 +717,14 @@ namespace OnlineStore.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ShowHistoryAdmin()
+        {
+            var UsersProducts = (from p in db.Product
+                                 join h in db.History on p.ProductId equals h.ProductId
+                                 select new HistoryViewModel { product = p, Quantity = h.Quantity, HistoryID = h.HistoryId, PurchaseDate = h.PurchaseDate, UserName = db.Users.FirstOrDefault(x => x.Id == h.UserId).UserName }).ToList();
+            return View(UsersProducts);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -724,5 +733,6 @@ namespace OnlineStore.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

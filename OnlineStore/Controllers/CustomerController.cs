@@ -294,7 +294,7 @@ namespace OnlineStore.Controllers
             var UsersProducts = (from p in db.Product
                                  join h in db.History on p.ProductId equals h.ProductId
                                  where h.UserId == id
-                                 select new HistoryViewModel { product = p, Quantity = h.Quantity, HistoryID = h.HistoryId, PurchaseDate = h.PurchaseDate }).ToList();
+                                 select new HistoryViewModel { product = p, Quantity = h.Quantity, HistoryID = h.HistoryId, PurchaseDate = h.PurchaseDate, UserName = db.Users.FirstOrDefault(x => x.Id == id).UserName }).ToList();
             return View(UsersProducts);
         }
 
