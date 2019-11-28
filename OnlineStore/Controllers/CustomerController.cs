@@ -196,9 +196,10 @@ namespace OnlineStore.Controllers
         [Authorize]
         public ActionResult ShowCart()
         {
+            var id = User.Identity.GetUserId();
             var UsersProducts = (from p in db.Product
                                  join c in db.Cart on p.ProductId equals c.ProductId
-                                 where c.Quantity > 0
+                                 where c.Quantity > 0 && c.UserId == id
                                  select new CartViewModel{ product = p, Quantity = c.Quantity, CartID = c.CartId}).ToList();
             return View(UsersProducts);
         }
@@ -246,9 +247,10 @@ namespace OnlineStore.Controllers
         {
             if (db.Users.Find(User.Identity.GetUserId()).Country == null || db.Users.Find(User.Identity.GetUserId()).City == null || db.Users.Find(User.Identity.GetUserId()).Street == null || db.Users.Find(User.Identity.GetUserId()).House == null || db.Users.Find(User.Identity.GetUserId()).Flat == null || db.Users.Find(User.Identity.GetUserId()).ZIP == null)
                 return RedirectToAction("ChangeAddress", "Manage");
+            var id = User.Identity.GetUserId();
             var UsersProducts = (from p in db.Product
                                  join c in db.Cart on p.ProductId equals c.ProductId
-                                 where c.Quantity > 0
+                                 where c.Quantity > 0 && c.UserId == id
                                  select new CartViewModel { product = p, Quantity = c.Quantity, CartID = c.CartId }).ToList();
             if(UsersProducts.Count == 0)
             {
@@ -263,9 +265,10 @@ namespace OnlineStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CheckoutConfirmed()
         {
+            var id = User.Identity.GetUserId();
             var carts = (from p in db.Product
                         join c in db.Cart on p.ProductId equals c.ProductId
-                        where c.Quantity > 0
+                        where c.Quantity > 0 && c.UserId == id
                         select new CartViewModel { product = p, Quantity = c.Quantity, CartID = c.CartId }).ToList();
             foreach (Cart c in db.Cart)
                 if (c.UserId == User.Identity.GetUserId())
@@ -287,8 +290,10 @@ namespace OnlineStore.Controllers
 
         public ActionResult ShowHistory()
         {
+            var id = User.Identity.GetUserId();
             var UsersProducts = (from p in db.Product
                                  join h in db.History on p.ProductId equals h.ProductId
+                                 where h.UserId == id
                                  select new HistoryViewModel { product = p, Quantity = h.Quantity, HistoryID = h.HistoryId, PurchaseDate = h.PurchaseDate }).ToList();
             return View(UsersProducts);
         }
